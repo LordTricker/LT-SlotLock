@@ -1,0 +1,24 @@
+{
+	"required": true,
+	"package": "pl.lordtricker.ltsl.client.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"ClientPlayerEntityMixin",
+		"LockedHotbarOverlayMixin",
+		"LockedSlotOverlayMixin",
+		"PreventEqDropMixin",
+		"ScreenHandlerAccessor",
+		"SlotMouseMixin",
+		"SlotOverlayMixin"
+	],
+	"mixins": [
+		"ClientPlayerEntityMixin",
+		"PreventEqDropMixin",
+		"ScreenHandlerAccessor",
+		"SlotMouseMixin",
+		"SlotOverlayMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

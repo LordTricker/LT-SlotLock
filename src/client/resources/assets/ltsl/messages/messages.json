@@ -1,0 +1,36 @@
+{
+  "mod.info": [
+    " ",
+    "&8[&3L&bT &fSlotLock&8] &7Mod LT-SlotLock by LordTricker",
+    "&8- &fDołącz do discord&8: &3https://dc.ltmods.pl/",
+    "&8- &fMoj GitHub&8: &3https://github.com/LordTricker/LT-SlotLock",
+    "&8- &fChcesz wesprzec? &3https://buycoffee.to/lordtricker",
+    " ",
+    "&8[&3L&bT &fSlotLock&8] &7Komendy pod &f/lts pomoc",
+    " "
+  ],
+  "command.help": [
+    " ",
+    "&8[&3L&bT &fSlotLock&8] &7Dostępne komendy:",
+    "&8- &f/lts &8- &7Informacje o modzie",
+    "&8- &f/lts settings &8- &7Ustawienia slotów",
+    " "
+  ],
+  "command.settings.save": [
+    " ",
+    "&8[&3L&bT &fSlotLock&8] &7Konfiguracja zapisana &apomyślnie&7!",
+    " "
+  ],
+  "player.join": [
+    " ",
+    "&8[&3L&bT &fSlotLock&8] &fLT-SlotLock &7uruchomił się &apoprawnie&7.",
+    "&8- &fDołącz do discord&8: &3https://dc.ltmods.pl/",
+    "&8- &7Komendy pod &f/lts pomoc",
+    " "
+  ],
+  "action.throw.denied": [
+    " ",
+    "&8[&3L&bT &fSlotLock&8] &7Ten slot jest &czablokowany&7, odlbokuj go aby wyrzucić z niego przedmiot. ",
+    " "
+  ]
+}
