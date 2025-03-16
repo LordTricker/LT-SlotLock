@@ -1,7 +1,7 @@
 {
 	"required": true,
 	"package": "pl.lordtricker.ltsl.client.mixin",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_17",
 	"client": [
 		"ClientPlayerEntityMixin",
 		"ItemFrameEntityMixin",

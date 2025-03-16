@@ -3,8 +3,6 @@ package pl.lordtricker.ltsl.client.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,7 +16,7 @@ public class LockedHotbarOverlayMixin {
     private static final Identifier LOCK_ICON = Identifier.of("ltsl", "textures/gui/lock_icon.png");
 
     @Inject(method = "renderHotbar", at = @At("RETURN"))
-    private void onRenderHotbar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+    private void onRenderHotbar(float tickDelta, DrawContext context, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
         int screenWidth = client.getWindow().getScaledWidth();
         int screenHeight = client.getWindow().getScaledHeight();
