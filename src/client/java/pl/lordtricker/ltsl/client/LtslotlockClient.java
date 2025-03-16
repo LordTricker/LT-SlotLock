@@ -4,18 +4,18 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import pl.lordtricker.ltsl.client.command.ClientCommandRegistration;
 import pl.lordtricker.ltsl.client.config.ConfigLoader;
-import pl.lordtricker.ltsl.client.config.ServersConfig;
-import pl.lordtricker.ltsl.client.keybinding.Toggling;
+import pl.lordtricker.ltsl.client.config.SettingsConfig;
 import pl.lordtricker.ltsl.client.util.ColorUtils;
 import pl.lordtricker.ltsl.client.util.Messages;
 
 public class LtslotlockClient implements ClientModInitializer {
-	public static ServersConfig serversConfig;
+	public static SettingsConfig serversConfig;
 	public static boolean slotSettingsActive = false;
+	public static boolean slotLockEnabled = true;
+	public static boolean itemFrameLockEnabled = false;
 
 	@Override
 	public void onInitializeClient() {
-		Toggling.init();
 
 		serversConfig = ConfigLoader.loadConfig();
 

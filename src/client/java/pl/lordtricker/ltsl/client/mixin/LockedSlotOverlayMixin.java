@@ -1,7 +1,9 @@
 package pl.lordtricker.ltsl.client.mixin;
 
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Identifier;
@@ -18,7 +20,12 @@ public abstract class LockedSlotOverlayMixin {
 
     @Inject(method = "drawSlot", at = @At("TAIL"))
     private void drawLockedOverlay(DrawContext context, Slot slot, CallbackInfo ci) {
-        if (slot.id >= 9 && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(slot.id)) {
+        if (MinecraftClient.getInstance().currentScreen != null && !(MinecraftClient.getInstance().currentScreen instanceof InventoryScreen)) {
+            return;
+        }
+        if (LtslotlockClient.slotLockEnabled
+                && slot.id >= 9
+                && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(slot.id)) {
             context.drawTexture(
                     RenderLayer::getGuiTextured,
                     LOCK_ICON,

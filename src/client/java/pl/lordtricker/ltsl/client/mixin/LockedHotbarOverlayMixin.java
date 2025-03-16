@@ -31,7 +31,8 @@ public class LockedHotbarOverlayMixin {
             int eqSlot = 36 + i;
             int slotX = xStart + i * 20;
 
-            if (LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(eqSlot)) {
+            if (LtslotlockClient.slotLockEnabled
+                    && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(eqSlot)) {
                 context.drawTexture(
                         RenderLayer::getGuiTextured,
                         LOCK_ICON,

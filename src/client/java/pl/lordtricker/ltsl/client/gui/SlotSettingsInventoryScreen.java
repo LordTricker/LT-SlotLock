@@ -8,7 +8,7 @@ import pl.lordtricker.ltsl.client.config.ConfigLoader;
 public class SlotSettingsInventoryScreen extends InventoryScreen {
 
     public SlotSettingsInventoryScreen() {
-        super(MinecraftClient.getInstance().player);
+        super(MinecraftClient.getInstance().player != null ? MinecraftClient.getInstance().player : null);
     }
 
     @Override

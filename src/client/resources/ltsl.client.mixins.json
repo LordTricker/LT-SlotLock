@@ -9,14 +9,16 @@
 		"PreventEqDropMixin",
 		"ScreenHandlerAccessor",
 		"SlotMouseMixin",
-		"SlotOverlayMixin"
+		"SlotOverlayMixin",
+		"ItemFrameEntityMixin"
 	],
 	"mixins": [
 		"ClientPlayerEntityMixin",
 		"PreventEqDropMixin",
 		"ScreenHandlerAccessor",
 		"SlotMouseMixin",
-		"SlotOverlayMixin"
+		"SlotOverlayMixin",
+		"ItemFrameEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

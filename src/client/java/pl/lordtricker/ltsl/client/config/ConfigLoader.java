@@ -28,27 +28,24 @@ public class ConfigLoader {
         }
     }
 
-    public static ServersConfig loadConfig() {
+    public static SettingsConfig loadConfig() {
         Path configFile = MOD_CONFIG_DIR.resolve(MAIN_CONFIG_FILE_NAME);
-
         if (!Files.exists(configFile)) {
-            ServersConfig defaultConfig = createDefaultConfig();
+            SettingsConfig defaultConfig = createDefaultConfig();
             saveConfig(defaultConfig);
             return defaultConfig;
         }
-
         try (Reader reader = Files.newBufferedReader(configFile)) {
-            ServersConfig loadedConfig = GSON.fromJson(reader, ServersConfig.class);
+            SettingsConfig loadedConfig = GSON.fromJson(reader, SettingsConfig.class);
             return loadedConfig;
         } catch (IOException e) {
             e.printStackTrace();
-            return new ServersConfig();
+            return new SettingsConfig();
         }
     }
 
-    public static void saveConfig(ServersConfig config) {
+    public static void saveConfig(SettingsConfig config) {
         Path configFile = MOD_CONFIG_DIR.resolve(MAIN_CONFIG_FILE_NAME);
-
         try (Writer writer = Files.newBufferedWriter(configFile)) {
             GSON.toJson(config, writer);
         } catch (IOException e) {
@@ -56,14 +53,13 @@ public class ConfigLoader {
         }
     }
 
-
-    private static ServersConfig createDefaultConfig() {
-        ServersConfig cfg = new ServersConfig();
-
+    private static SettingsConfig createDefaultConfig() {
+        SettingsConfig cfg = new SettingsConfig();
         cfg.slotSettings.doNotCleanSlots = List.of();
         cfg.slotSettings.activeSlotHex = "#80ccff";
         cfg.slotSettings.blockedSlotHex = "#80cc00";
-
+        cfg.slotLockEnabled = true;
+        cfg.itemFrameLockEnabled = true;
         return cfg;
     }
 }

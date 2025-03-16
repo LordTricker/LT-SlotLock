@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.command.CommandRegistryAccess;
 import pl.lordtricker.ltsl.client.LtslotlockClient;
-import pl.lordtricker.ltsl.client.gui.SlotSettingsInventoryScreen;
+import pl.lordtricker.ltsl.client.gui.MainSettingsScreen;
 import pl.lordtricker.ltsl.client.util.ColorUtils;
 import pl.lordtricker.ltsl.client.util.Messages;
 
@@ -33,7 +33,6 @@ public class ClientCommandRegistration {
                         // /ltb settings – otwarcie GUI ustawień
                         .then(ClientCommandManager.literal("settings")
                                 .executes(ctx -> {
-                                    LtslotlockClient.slotSettingsActive = true;
                                     MinecraftClient client = MinecraftClient.getInstance();
                                     client.setScreen(null);
                                     new Thread(() -> {
@@ -42,7 +41,7 @@ public class ClientCommandRegistration {
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
-                                        client.execute(() -> client.setScreen(new SlotSettingsInventoryScreen()));
+                                        client.execute(() -> client.setScreen(new MainSettingsScreen()));
                                     }).start();
                                     return 1;
                                 })

@@ -32,5 +32,10 @@
     " ",
     "&8[&3L&bT &fSlotLock&8] &7Ten slot jest &czablokowany&7, odlbokuj go aby wyrzucić z niego przedmiot. ",
     " "
+  ],
+  "action.itemframe.locked": [
+    " ",
+    "&8[&3L&bT &fSlotLock&8] &cZablokowano &7wsadzanie przedmiotów do &fItemFrame&7!. ",
+    " "
   ]
 }
