@@ -21,12 +21,14 @@ public abstract class PreventEqDropMixin {
     @Inject(method = "onSlotClick", at = @At("HEAD"), cancellable = true)
     private void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player, CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();
+
         if (client.currentScreen != null && !(client.currentScreen instanceof InventoryScreen)) {
             return;
         }
+
         if (actionType == SlotActionType.THROW) {
-            if (LtslotlockClient.slotLockEnabled
-                    && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(slotIndex)) {
+            boolean isLocked = LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(slotIndex);
+            if (LtslotlockClient.slotLockEnabled && isLocked) {
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - lastEqDropMessageTime > 50) {
                     player.sendMessage(ColorUtils.translateColorCodes(Messages.get("action.throw.denied")), false);

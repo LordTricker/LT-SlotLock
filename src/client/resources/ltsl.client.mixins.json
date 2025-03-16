@@ -4,21 +4,24 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"ClientPlayerEntityMixin",
+		"ItemFrameEntityMixin",
 		"LockedHotbarOverlayMixin",
 		"LockedSlotOverlayMixin",
 		"PreventEqDropMixin",
 		"ScreenHandlerAccessor",
 		"SlotMouseMixin",
-		"SlotOverlayMixin",
-		"ItemFrameEntityMixin"
+		"SlotOverlayMixin"
 	],
 	"mixins": [
 		"ClientPlayerEntityMixin",
+		"ClientPlayNetworkHandlerMixin",
+		"ItemFrameEntityMixin",
+		"ItemFrameInteractionBlockMixin",
+		"PlayerInteractEntityC2SPacketAccessor",
 		"PreventEqDropMixin",
 		"ScreenHandlerAccessor",
 		"SlotMouseMixin",
-		"SlotOverlayMixin",
-		"ItemFrameEntityMixin"
+		"SlotOverlayMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

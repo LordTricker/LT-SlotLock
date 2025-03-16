@@ -26,15 +26,15 @@ public abstract class ClientPlayerEntityMixin extends net.minecraft.client.netwo
         if (client.currentScreen != null && !(client.currentScreen instanceof InventoryScreen)) {
             return;
         }
+
         int selected = this.getInventory().selectedSlot;
         int eqSlot = selected + 36;
-        if (LtslotlockClient.slotLockEnabled
-                && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(eqSlot)
-                && !this.getInventory().getStack(selected).isEmpty()) {
+        boolean isLocked = LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(eqSlot);
+
+        if (LtslotlockClient.slotLockEnabled && isLocked && !this.getInventory().getStack(selected).isEmpty()) {
             String msg = Messages.get("action.throw.denied");
             this.sendMessage(ColorUtils.translateColorCodes(msg), false);
             cir.setReturnValue(false);
         }
     }
 }
-
