@@ -1,7 +1,8 @@
 package pl.lordtricker.ltsl.client.mixin;
 
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.collection.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +20,7 @@ public abstract class SlotOverlayMixin {
     @Shadow protected int y;
 
     @Inject(method = "render", at = @At("TAIL"))
-    private void onRender(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    private void onRender(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if (!LtslotlockClient.slotSettingsActive) return;
 
         HandledScreen<?> screen = (HandledScreen<?>)(Object)this;
@@ -34,17 +35,14 @@ public abstract class SlotOverlayMixin {
             Slot slot = slots.get(i);
             if (slot == null) continue;
 
-            int index = i;
-            int color = settings.doNotCleanSlots.contains(index)
+            int color = settings.doNotCleanSlots.contains(i)
                     ? 0x8000FF00
                     : 0x80FF0000;
 
             int realX = this.x + slot.x;
             int realY = this.y + slot.y;
-            context.fill(realX, realY, realX + 16, realY + 16, color);
+
+            DrawableHelper.fill(matrices, realX, realY, realX + 16, realY + 16, color);
         }
     }
 }
-
-
-

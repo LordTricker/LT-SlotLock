@@ -1,8 +1,8 @@
 package pl.lordtricker.ltsl.client.gui;
 
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import pl.lordtricker.ltsl.client.LtslotlockClient;
 import pl.lordtricker.ltsl.client.config.ConfigLoader;
@@ -73,15 +73,15 @@ public class MainSettingsScreen extends Screen {
         super.removed();
     }
 
-    protected void drawCenteredText(DrawContext context, net.minecraft.client.font.TextRenderer textRenderer, Text text, int x, int y, int color) {
+    protected void drawCenteredText(MatrixStack matrices, net.minecraft.client.font.TextRenderer textRenderer, net.minecraft.text.Text text, int x, int y, int color) {
         int textWidth = textRenderer.getWidth(text);
-        context.drawText(textRenderer, text, x - textWidth / 2, y, color, false);
+        textRenderer.draw(matrices, text, x - textWidth / 2, y, color);
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
-        super.render(context, mouseX, mouseY, delta);
-        drawCenteredText(context, this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFF);
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        this.renderBackground(matrices);
+        super.render(matrices, mouseX, mouseY, delta);
+        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFF);
     }
 }
