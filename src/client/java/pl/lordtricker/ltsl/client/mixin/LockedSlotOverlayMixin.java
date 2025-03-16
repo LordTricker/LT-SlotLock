@@ -27,7 +27,6 @@ public abstract class LockedSlotOverlayMixin {
                 && slot.id >= 9
                 && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(slot.id)) {
             context.drawTexture(
-                    RenderLayer::getGuiTextured,
                     LOCK_ICON,
                     slot.x,
                     slot.y,

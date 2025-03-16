@@ -34,10 +34,9 @@ public class LockedHotbarOverlayMixin {
             if (LtslotlockClient.slotLockEnabled
                     && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(eqSlot)) {
                 context.drawTexture(
-                        RenderLayer::getGuiTextured,
                         LOCK_ICON,
-                        slotX +2,
-                        y +2,
+                        slotX + 2,
+                        y + 2,
                         0F,
                         0F,
                         18,
