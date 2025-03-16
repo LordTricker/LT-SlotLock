@@ -27,43 +27,59 @@ public class MainSettingsScreen extends Screen {
         int totalHeight = btnHeight * 3 + spacing * 2;
         int startY = (this.height - totalHeight) / 2;
 
-        toggleSlotLockButton = ButtonWidget.builder(
+        ButtonWidget toggleSlotLockButton = new ButtonWidget(
+                centerX - btnWidth / 2,
+                startY,
+                btnWidth,
+                btnHeight,
                 Text.literal("Slot Locking: " + (LtslotlockClient.slotLockEnabled ? "ON" : "OFF")),
                 btn -> {
                     LtslotlockClient.slotLockEnabled = !LtslotlockClient.slotLockEnabled;
                     String newState = LtslotlockClient.slotLockEnabled ? "ON" : "OFF";
                     btn.setMessage(Text.literal("Slot Locking: " + newState));
                 }
-        ).dimensions(centerX - btnWidth / 2, startY, btnWidth, btnHeight).build();
+        );
         addDrawableChild(toggleSlotLockButton);
 
-        toggleItemFrameLockButton = ButtonWidget.builder(
+        ButtonWidget toggleItemFrameLockButton = new ButtonWidget(
+                centerX - btnWidth / 2,
+                startY + btnHeight + spacing,
+                btnWidth,
+                btnHeight,
                 Text.literal("Item Frame Lock: " + (LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF")),
                 btn -> {
                     LtslotlockClient.itemFrameLockEnabled = !LtslotlockClient.itemFrameLockEnabled;
                     String newState = LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF";
                     btn.setMessage(Text.literal("Item Frame Lock: " + newState));
                 }
-        ).dimensions(centerX - btnWidth / 2, startY + btnHeight + spacing, btnWidth, btnHeight).build();
+        );
         addDrawableChild(toggleItemFrameLockButton);
 
 
-        slotSettingsButton = ButtonWidget.builder(
+        ButtonWidget slotSettingsButton = new ButtonWidget(
+                centerX - btnWidth / 2,
+                startY + 2 * (btnHeight + spacing + 5),
+                btnWidth,
+                btnHeight,
                 Text.literal("Slot Settings"),
                 btn -> {
                     LtslotlockClient.slotSettingsActive = true;
                     this.client.setScreen(new SlotSettingsInventoryScreen());
                 }
-        ).dimensions(centerX - btnWidth / 2, startY + 2 * (btnHeight + spacing + 5), btnWidth, btnHeight).build();
+        );
         addDrawableChild(slotSettingsButton);
 
-        saveButton = ButtonWidget.builder(
+        ButtonWidget saveButton = new ButtonWidget(
+                centerX - (btnWidth / 2),
+                this.height - btnHeight - 20,
+                btnWidth,
+                btnHeight,
                 Text.literal("Save and close"),
                 btn -> {
                     ConfigLoader.saveConfig(LtslotlockClient.serversConfig);
                     this.client.setScreen(null);
                 }
-        ).dimensions(centerX - btnWidth / 2, this.height - btnHeight - 20, btnWidth, btnHeight).build();
+        );
         addDrawableChild(saveButton);
     }
 
@@ -73,7 +89,7 @@ public class MainSettingsScreen extends Screen {
         super.removed();
     }
 
-    protected void drawCenteredText(MatrixStack matrices, net.minecraft.client.font.TextRenderer textRenderer, net.minecraft.text.Text text, int x, int y, int color) {
+    protected void renderCenteredText(MatrixStack matrices, net.minecraft.client.font.TextRenderer textRenderer, Text text, int x, int y, int color) {
         int textWidth = textRenderer.getWidth(text);
         textRenderer.draw(matrices, text, x - textWidth / 2, y, color);
     }
@@ -82,6 +98,6 @@ public class MainSettingsScreen extends Screen {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
-        drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFF);
+        renderCenteredText(matrices, this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFF);
     }
 }
