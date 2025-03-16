@@ -17,7 +17,7 @@ import pl.lordtricker.ltsl.client.util.Messages;
 public abstract class ClientPlayerEntityMixin extends net.minecraft.client.network.AbstractClientPlayerEntity {
 
     public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) {
-        super(world, profile, null);
+        super(world, profile);
     }
 
     @Inject(method = "dropSelectedItem", at = @At("HEAD"), cancellable = true)

@@ -15,7 +15,7 @@ public class MainSettingsScreen extends Screen {
     private ButtonWidget saveButton;
 
     public MainSettingsScreen() {
-        super(Text.literal("LT-SlotLock Settings"));
+        super(Text.of("LT-SlotLock Settings"));
     }
 
     @Override
@@ -32,11 +32,11 @@ public class MainSettingsScreen extends Screen {
                 startY,
                 btnWidth,
                 btnHeight,
-                Text.literal("Slot Locking: " + (LtslotlockClient.slotLockEnabled ? "ON" : "OFF")),
+                Text.of("Slot Locking: " + (LtslotlockClient.slotLockEnabled ? "ON" : "OFF")),
                 btn -> {
                     LtslotlockClient.slotLockEnabled = !LtslotlockClient.slotLockEnabled;
                     String newState = LtslotlockClient.slotLockEnabled ? "ON" : "OFF";
-                    btn.setMessage(Text.literal("Slot Locking: " + newState));
+                    btn.setMessage(Text.of("Slot Locking: " + newState));
                 }
         );
         addDrawableChild(toggleSlotLockButton);
@@ -46,11 +46,11 @@ public class MainSettingsScreen extends Screen {
                 startY + btnHeight + spacing,
                 btnWidth,
                 btnHeight,
-                Text.literal("Item Frame Lock: " + (LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF")),
+                Text.of("Item Frame Lock: " + (LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF")),
                 btn -> {
                     LtslotlockClient.itemFrameLockEnabled = !LtslotlockClient.itemFrameLockEnabled;
                     String newState = LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF";
-                    btn.setMessage(Text.literal("Item Frame Lock: " + newState));
+                    btn.setMessage(Text.of("Item Frame Lock: " + newState));
                 }
         );
         addDrawableChild(toggleItemFrameLockButton);
@@ -61,7 +61,7 @@ public class MainSettingsScreen extends Screen {
                 startY + 2 * (btnHeight + spacing + 5),
                 btnWidth,
                 btnHeight,
-                Text.literal("Slot Settings"),
+                Text.of("Slot Settings"),
                 btn -> {
                     LtslotlockClient.slotSettingsActive = true;
                     this.client.setScreen(new SlotSettingsInventoryScreen());
@@ -74,7 +74,7 @@ public class MainSettingsScreen extends Screen {
                 this.height - btnHeight - 20,
                 btnWidth,
                 btnHeight,
-                Text.literal("Save and close"),
+                Text.of("Save and close"),
                 btn -> {
                     ConfigLoader.saveConfig(LtslotlockClient.serversConfig);
                     this.client.setScreen(null);

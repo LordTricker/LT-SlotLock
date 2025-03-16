@@ -1,12 +1,9 @@
 package pl.lordtricker.ltsl.client.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.command.CommandRegistryAccess;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
 import pl.lordtricker.ltsl.client.gui.MainSettingsScreen;
 import pl.lordtricker.ltsl.client.util.ColorUtils;
 import pl.lordtricker.ltsl.client.util.Messages;
@@ -14,14 +11,7 @@ import pl.lordtricker.ltsl.client.util.Messages;
 
 public class ClientCommandRegistration {
 
-    public static void registerCommands() {
-        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistration::registerLtFilterCommand);
-    }
-
-    private static void registerLtFilterCommand(
-            CommandDispatcher<FabricClientCommandSource> dispatcher,
-            CommandRegistryAccess registryAccess
-    ) {
+    public static void registerCommands(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         dispatcher.register(
                 ClientCommandManager.literal("lts")
                         // /ltf – podstawowe info
