@@ -28,20 +28,20 @@ public class MainSettingsScreen extends Screen {
         int startY = (this.height - totalHeight) / 2;
 
         toggleSlotLockButton = ButtonWidget.builder(
-                Text.literal("Slot Locking: " + (LtslotlockClient.slotLockEnabled ? "ON" : "OFF")),
+                Text.literal("Slot Locking: " + (LtslotlockClient.serversConfig.slotLockEnabled ? "ON" : "OFF")),
                 btn -> {
-                    LtslotlockClient.slotLockEnabled = !LtslotlockClient.slotLockEnabled;
-                    String newState = LtslotlockClient.slotLockEnabled ? "ON" : "OFF";
+                    LtslotlockClient.serversConfig.slotLockEnabled = !LtslotlockClient.serversConfig.slotLockEnabled;
+                    String newState = LtslotlockClient.serversConfig.slotLockEnabled ? "ON" : "OFF";
                     btn.setMessage(Text.literal("Slot Locking: " + newState));
                 }
         ).dimensions(centerX - btnWidth / 2, startY, btnWidth, btnHeight).build();
         addDrawableChild(toggleSlotLockButton);
 
         toggleItemFrameLockButton = ButtonWidget.builder(
-                Text.literal("Item Frame Lock: " + (LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF")),
+                Text.literal("Item Frame Lock: " + (LtslotlockClient.serversConfig.itemFrameLockEnabled ? "ON" : "OFF")),
                 btn -> {
-                    LtslotlockClient.itemFrameLockEnabled = !LtslotlockClient.itemFrameLockEnabled;
-                    String newState = LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF";
+                    LtslotlockClient.serversConfig.itemFrameLockEnabled = !LtslotlockClient.serversConfig.itemFrameLockEnabled;
+                    String newState = LtslotlockClient.serversConfig.itemFrameLockEnabled ? "ON" : "OFF";
                     btn.setMessage(Text.literal("Item Frame Lock: " + newState));
                 }
         ).dimensions(centerX - btnWidth / 2, startY + btnHeight + spacing, btnWidth, btnHeight).build();
