@@ -32,10 +32,10 @@ public class MainSettingsScreen extends Screen {
                 startY,
                 btnWidth,
                 btnHeight,
-                Text.literal("Slot Locking: " + (LtslotlockClient.slotLockEnabled ? "ON" : "OFF")),
+                Text.literal("Slot Locking: " + (LtslotlockClient.serversConfig.slotLockEnabled ? "ON" : "OFF")),
                 btn -> {
-                    LtslotlockClient.slotLockEnabled = !LtslotlockClient.slotLockEnabled;
-                    String newState = LtslotlockClient.slotLockEnabled ? "ON" : "OFF";
+                    LtslotlockClient.serversConfig.slotLockEnabled = !LtslotlockClient.serversConfig.slotLockEnabled;
+                    String newState = LtslotlockClient.serversConfig.slotLockEnabled ? "ON" : "OFF";
                     btn.setMessage(Text.literal("Slot Locking: " + newState));
                 }
         );
@@ -46,10 +46,10 @@ public class MainSettingsScreen extends Screen {
                 startY + btnHeight + spacing,
                 btnWidth,
                 btnHeight,
-                Text.literal("Item Frame Lock: " + (LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF")),
+                Text.literal("Item Frame Lock: " + (LtslotlockClient.serversConfig.itemFrameLockEnabled ? "ON" : "OFF")),
                 btn -> {
-                    LtslotlockClient.itemFrameLockEnabled = !LtslotlockClient.itemFrameLockEnabled;
-                    String newState = LtslotlockClient.itemFrameLockEnabled ? "ON" : "OFF";
+                    LtslotlockClient.serversConfig.itemFrameLockEnabled = !LtslotlockClient.serversConfig.itemFrameLockEnabled;
+                    String newState = LtslotlockClient.serversConfig.itemFrameLockEnabled ? "ON" : "OFF";
                     btn.setMessage(Text.literal("Item Frame Lock: " + newState));
                 }
         );
