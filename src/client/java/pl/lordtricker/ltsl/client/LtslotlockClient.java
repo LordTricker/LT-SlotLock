@@ -18,6 +18,8 @@ public class LtslotlockClient implements ClientModInitializer {
 	public void onInitializeClient() {
 
 		serversConfig = ConfigLoader.loadConfig();
+		itemFrameLockEnabled = serversConfig.itemFrameLockEnabled;
+		slotLockEnabled = serversConfig.slotLockEnabled;
 
 		ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
 			if (client.player != null) {
