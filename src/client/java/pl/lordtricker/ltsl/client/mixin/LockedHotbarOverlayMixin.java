@@ -15,7 +15,7 @@ import pl.lordtricker.ltsl.client.LtslotlockClient;
 @Mixin(InGameHud.class)
 public class LockedHotbarOverlayMixin {
 
-    private static final Identifier LOCK_ICON = Identifier.of("ltsl", "textures/gui/lock_icon.png");
+    private static final Identifier LOCK_ICON = Identifier.of("ltsl", "textures/gui/lock.png");
 
     @Inject(method = "renderHotbar", at = @At("RETURN"))
     private void onRenderHotbar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
