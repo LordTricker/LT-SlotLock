@@ -9,9 +9,9 @@ import pl.lordtricker.ltsl.client.config.ConfigLoader;
 
 public class MainSettingsScreen extends Screen {
 
-    private ButtonWidget slotSettingsButton;
     private ButtonWidget toggleSlotLockButton;
     private ButtonWidget toggleItemFrameLockButton;
+    private ButtonWidget slotSettingsButton;
     private ButtonWidget saveButton;
 
     public MainSettingsScreen() {
@@ -27,38 +27,46 @@ public class MainSettingsScreen extends Screen {
         int totalHeight = btnHeight * 3 + spacing * 2;
         int startY = (this.height - totalHeight) / 2;
 
-        ButtonWidget toggleSlotLockButton = new ButtonWidget(
+        // Toggle Slot Lock
+        toggleSlotLockButton = new ButtonWidget(
                 centerX - btnWidth / 2,
                 startY,
                 btnWidth,
                 btnHeight,
                 Text.of("Slot Locking: " + (LtslotlockClient.serversConfig.slotLockEnabled ? "ON" : "OFF")),
                 btn -> {
-                    LtslotlockClient.serversConfig.slotLockEnabled = !LtslotlockClient.serversConfig.slotLockEnabled;
-                    String newState = LtslotlockClient.serversConfig.slotLockEnabled ? "ON" : "OFF";
-                    btn.setMessage(Text.of("Slot Locking: " + newState));
+                    boolean newState = !LtslotlockClient.serversConfig.slotLockEnabled;
+                    LtslotlockClient.serversConfig.slotLockEnabled = newState;
+                    LtslotlockClient.slotLockEnabled = newState;
+                    btn.setMessage(Text.of("Slot Locking: " + (newState ? "ON" : "OFF")));
+                    ConfigLoader.saveConfig(LtslotlockClient.serversConfig);
                 }
         );
         addDrawableChild(toggleSlotLockButton);
 
-        ButtonWidget toggleItemFrameLockButton = new ButtonWidget(
+
+        // Toggle Item Frame Lock
+        toggleItemFrameLockButton = new ButtonWidget(
                 centerX - btnWidth / 2,
                 startY + btnHeight + spacing,
                 btnWidth,
                 btnHeight,
                 Text.of("Item Frame Lock: " + (LtslotlockClient.serversConfig.itemFrameLockEnabled ? "ON" : "OFF")),
                 btn -> {
-                    LtslotlockClient.serversConfig.itemFrameLockEnabled = !LtslotlockClient.serversConfig.itemFrameLockEnabled;
-                    String newState = LtslotlockClient.serversConfig.itemFrameLockEnabled ? "ON" : "OFF";
-                    btn.setMessage(Text.of("Item Frame Lock: " + newState));
+                    boolean newState = !LtslotlockClient.serversConfig.itemFrameLockEnabled;
+                    LtslotlockClient.serversConfig.itemFrameLockEnabled = newState;
+                    LtslotlockClient.itemFrameLockEnabled = newState;
+                    btn.setMessage(Text.of("Item Frame Lock: " + (newState ? "ON" : "OFF")));
+                    ConfigLoader.saveConfig(LtslotlockClient.serversConfig);
                 }
         );
         addDrawableChild(toggleItemFrameLockButton);
 
 
-        ButtonWidget slotSettingsButton = new ButtonWidget(
+        // Slot Settings Button
+        slotSettingsButton = new ButtonWidget(
                 centerX - btnWidth / 2,
-                startY + 2 * (btnHeight + spacing + 5),
+                startY + 2 * (btnHeight + spacing),
                 btnWidth,
                 btnHeight,
                 Text.of("Slot Settings"),
@@ -69,8 +77,9 @@ public class MainSettingsScreen extends Screen {
         );
         addDrawableChild(slotSettingsButton);
 
-        ButtonWidget saveButton = new ButtonWidget(
-                centerX - (btnWidth / 2),
+        // Save and Close Button
+        saveButton = new ButtonWidget(
+                centerX - btnWidth / 2,
                 this.height - btnHeight - 20,
                 btnWidth,
                 btnHeight,
@@ -89,7 +98,7 @@ public class MainSettingsScreen extends Screen {
         super.removed();
     }
 
-    protected void renderCenteredText(MatrixStack matrices, net.minecraft.client.font.TextRenderer textRenderer, Text text, int x, int y, int color) {
+    private void renderCenteredText(MatrixStack matrices, net.minecraft.client.font.TextRenderer textRenderer, Text text, int x, int y, int color) {
         int textWidth = textRenderer.getWidth(text);
         textRenderer.draw(matrices, text, x - textWidth / 2, y, color);
     }
