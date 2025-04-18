@@ -16,7 +16,6 @@ public class LtslotlockClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-
 		serversConfig = ConfigLoader.loadConfig();
 		itemFrameLockEnabled = serversConfig.itemFrameLockEnabled;
 		slotLockEnabled = serversConfig.slotLockEnabled;

@@ -4,7 +4,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +15,7 @@ import pl.lordtricker.ltsl.client.LtslotlockClient;
 @Mixin(HandledScreen.class)
 public abstract class LockedSlotOverlayMixin {
 
-    private static final Identifier LOCK_ICON = Identifier.of("ltsl", "textures/gui/lock_icon.png");
+    private static final Identifier LOCK_ICON = Identifier.of("ltsl", "textures/gui/lock.png");
 
     @Inject(method = "drawSlot", at = @At("TAIL"))
     private void drawLockedOverlay(DrawContext context, Slot slot, CallbackInfo ci) {
