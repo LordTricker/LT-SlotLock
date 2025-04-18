@@ -7,6 +7,8 @@ import net.minecraft.text.Text;
 import pl.lordtricker.ltsl.client.LtslotlockClient;
 import pl.lordtricker.ltsl.client.config.ConfigLoader;
 
+import static pl.lordtricker.ltsl.client.LtslotlockClient.serversConfig;
+
 public class MainSettingsScreen extends Screen {
 
     private ButtonWidget slotSettingsButton;
@@ -32,11 +34,13 @@ public class MainSettingsScreen extends Screen {
                 startY,
                 btnWidth,
                 btnHeight,
-                Text.literal("Slot Locking: " + (LtslotlockClient.serversConfig.slotLockEnabled ? "ON" : "OFF")),
+                Text.literal("Slot Locking: " + (serversConfig.slotLockEnabled ? "ON" : "OFF")),
                 btn -> {
-                    LtslotlockClient.serversConfig.slotLockEnabled = !LtslotlockClient.serversConfig.slotLockEnabled;
-                    String newState = LtslotlockClient.serversConfig.slotLockEnabled ? "ON" : "OFF";
-                    btn.setMessage(Text.literal("Slot Locking: " + newState));
+                    boolean newSlotState = !serversConfig.slotLockEnabled;
+                    serversConfig.slotLockEnabled = newSlotState;
+                    LtslotlockClient.slotLockEnabled = newSlotState;
+                    btn.setMessage(Text.literal("Slot Locking: " + (newSlotState ? "ON" : "OFF")));
+                    ConfigLoader.saveConfig(serversConfig);
                 }
         );
         addDrawableChild(toggleSlotLockButton);
@@ -46,11 +50,13 @@ public class MainSettingsScreen extends Screen {
                 startY + btnHeight + spacing,
                 btnWidth,
                 btnHeight,
-                Text.literal("Item Frame Lock: " + (LtslotlockClient.serversConfig.itemFrameLockEnabled ? "ON" : "OFF")),
+                Text.literal("Item Frame Lock: " + (serversConfig.itemFrameLockEnabled ? "ON" : "OFF")),
                 btn -> {
-                    LtslotlockClient.serversConfig.itemFrameLockEnabled = !LtslotlockClient.serversConfig.itemFrameLockEnabled;
-                    String newState = LtslotlockClient.serversConfig.itemFrameLockEnabled ? "ON" : "OFF";
-                    btn.setMessage(Text.literal("Item Frame Lock: " + newState));
+                    boolean newState = !serversConfig.itemFrameLockEnabled;
+                    serversConfig.itemFrameLockEnabled = newState;
+                    LtslotlockClient.itemFrameLockEnabled = newState;
+                    btn.setMessage(Text.literal("Item Frame Lock: " + (newState ? "ON" : "OFF")));
+                    ConfigLoader.saveConfig(serversConfig);
                 }
         );
         addDrawableChild(toggleItemFrameLockButton);
@@ -76,7 +82,7 @@ public class MainSettingsScreen extends Screen {
                 btnHeight,
                 Text.literal("Save and close"),
                 btn -> {
-                    ConfigLoader.saveConfig(LtslotlockClient.serversConfig);
+                    ConfigLoader.saveConfig(serversConfig);
                     this.client.setScreen(null);
                 }
         );
@@ -85,7 +91,7 @@ public class MainSettingsScreen extends Screen {
 
     @Override
     public void removed() {
-        ConfigLoader.saveConfig(LtslotlockClient.serversConfig);
+        ConfigLoader.saveConfig(serversConfig);
         super.removed();
     }
 

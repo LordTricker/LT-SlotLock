@@ -18,7 +18,7 @@ import pl.lordtricker.ltsl.client.LtslotlockClient;
 
 @Mixin(HandledScreen.class)
 public abstract class LockedSlotOverlayMixin {
-    private static final Identifier LOCK_ICON = new Identifier("ltsl", "textures/gui/lock_icon.png");
+    private static final Identifier LOCK_ICON = new Identifier("ltsl", "textures/gui/lock.png");
 
     @Shadow protected int x;
     @Shadow protected int y;
