@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import static pl.lordtricker.ltsl.client.config.SlotSettings.adsEnabled;
+
 public class ConfigLoader {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String MAIN_CONFIG_FILE_NAME = "ltslotlock-config.json";
@@ -56,6 +58,7 @@ public class ConfigLoader {
     private static SettingsConfig createDefaultConfig() {
         SettingsConfig cfg = new SettingsConfig();
         cfg.slotSettings.doNotCleanSlots = List.of();
+        cfg.adsEnabled = adsEnabled;
         cfg.slotSettings.activeSlotHex = "#80ccff";
         cfg.slotSettings.blockedSlotHex = "#80cc00";
         cfg.slotLockEnabled = true;

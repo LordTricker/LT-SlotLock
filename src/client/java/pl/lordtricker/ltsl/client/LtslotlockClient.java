@@ -7,6 +7,7 @@ import pl.lordtricker.ltsl.client.config.ConfigLoader;
 import pl.lordtricker.ltsl.client.config.SettingsConfig;
 import pl.lordtricker.ltsl.client.util.ColorUtils;
 import pl.lordtricker.ltsl.client.util.Messages;
+import pl.lordtricker.ltsl.client.util.RemoteAdConfig;
 
 public class LtslotlockClient implements ClientModInitializer {
 	public static SettingsConfig serversConfig;
@@ -20,6 +21,8 @@ public class LtslotlockClient implements ClientModInitializer {
 		serversConfig = ConfigLoader.loadConfig();
 		itemFrameLockEnabled = serversConfig.itemFrameLockEnabled;
 		slotLockEnabled = serversConfig.slotLockEnabled;
+
+        RemoteAdConfig.preloadAsync();
 
 		ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
 			if (client.player != null) {
