@@ -3,6 +3,7 @@ package pl.lordtricker.ltsl.client.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import static pl.lordtricker.ltsl.client.config.SlotSettings.adsEnabled;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -56,6 +57,7 @@ public class ConfigLoader {
     private static SettingsConfig createDefaultConfig() {
         SettingsConfig cfg = new SettingsConfig();
         cfg.slotSettings.doNotCleanSlots = List.of();
+        cfg.adsEnabled = adsEnabled;
         cfg.slotSettings.activeSlotHex = "#80ccff";
         cfg.slotSettings.blockedSlotHex = "#80cc00";
         cfg.slotLockEnabled = true;

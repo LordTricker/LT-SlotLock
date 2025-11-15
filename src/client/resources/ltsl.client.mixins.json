@@ -10,7 +10,10 @@
 		"PreventEqDropMixin",
 		"ScreenHandlerAccessor",
 		"SlotMouseMixin",
-		"SlotOverlayMixin"
+		"SlotOverlayMixin",
+        "ServerListAccessor",
+        "ServerListMixin",
+        "MultiplayerScreenMixin"
 	],
 	"mixins": [
 		"ClientPlayerEntityMixin",
@@ -21,7 +24,10 @@
 		"PreventEqDropMixin",
 		"ScreenHandlerAccessor",
 		"SlotMouseMixin",
-		"SlotOverlayMixin"
+		"SlotOverlayMixin",
+        "ServerListAccessor",
+        "ServerListMixin",
+        "MultiplayerScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
