@@ -16,8 +16,8 @@ public abstract class ClientPlayNetworkHandlerMixin {
     @Inject(method = "send(Lnet/minecraft/network/packet/Packet;)V", at = @At("HEAD"), cancellable = true)
     private void onSendPacket(Packet<?> packet, CallbackInfo ci) {
         if (packet instanceof ClickSlotC2SPacket clickSlotPacket) {
-            if (clickSlotPacket.getActionType() == SlotActionType.THROW) {
-                int slotIndex = clickSlotPacket.getSlot();
+            if (clickSlotPacket.actionType() == SlotActionType.THROW) {
+                int slotIndex = clickSlotPacket.slot();
                 if (SlotLockLogic.shouldBlockThrowAction(slotIndex)) {
                     ci.cancel();
                 }

@@ -20,17 +20,18 @@ public final class CommandUi {
 
     public static MutableText clickable(String text, ClickEvent.Action action, String command, String hoverText) {
         MutableText out = colored(text);
-        ClickEvent clickEvent;
-        if (action == ClickEvent.Action.OPEN_URL) {
-            clickEvent = new ClickEvent(action, URI.create(command).toString());
-        } else if (action == ClickEvent.Action.CHANGE_PAGE) {
-            clickEvent = new ClickEvent(action, Integer.toString(Integer.parseInt(command)));
-        } else {
-            clickEvent = new ClickEvent(action, command);
-        }
+        ClickEvent clickEvent = switch (action) {
+            case RUN_COMMAND -> new ClickEvent.RunCommand(command);
+            case SUGGEST_COMMAND -> new ClickEvent.SuggestCommand(command);
+            case OPEN_URL -> new ClickEvent.OpenUrl(URI.create(command));
+            case OPEN_FILE -> new ClickEvent.OpenFile(command);
+            case COPY_TO_CLIPBOARD -> new ClickEvent.CopyToClipboard(command);
+            case CHANGE_PAGE -> new ClickEvent.ChangePage(Integer.parseInt(command));
+            default -> throw new IllegalArgumentException("Unsupported click action: " + action);
+        };
         Style style = Style.EMPTY.withClickEvent(clickEvent);
         if (hoverText != null && !hoverText.isEmpty()) {
-            style = style.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal(hoverText)));
+            style = style.withHoverEvent(new HoverEvent.ShowText(Text.literal(hoverText)));
         }
         out.setStyle(style);
         return out;

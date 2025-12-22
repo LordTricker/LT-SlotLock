@@ -25,7 +25,7 @@ public class SlotSettingsInventoryScreen extends InventoryScreen {
     );
     private static final Text LEGEND_LINE_GREEN = buildLegendLine("Green", Formatting.GREEN, " = Locked from dropping");
     private static final Text LEGEND_LINE_RED = buildLegendLine("Red", Formatting.RED, " = Can be dropped");
-    private static final int HELP_COLOR = 0xFFFFFF;
+    private static final int HELP_COLOR = 0xFFFFFFFF;
     private static final float HELP_SCALE = 0.8f;
 
     public SlotSettingsInventoryScreen() {
@@ -61,13 +61,13 @@ public class SlotSettingsInventoryScreen extends InventoryScreen {
 
     private void drawCenteredTextScaled(DrawContext context, Text text, int x, int y, int color, float scale) {
         var matrices = context.getMatrices();
-        matrices.push();
-        matrices.scale(scale, scale, 1.0f);
+        matrices.pushMatrix();
+        matrices.scale(scale, scale);
         int scaledX = Math.round(x / scale);
         int scaledY = Math.round(y / scale);
         int textWidth = this.textRenderer.getWidth(text);
         context.drawText(this.textRenderer, text, scaledX - textWidth / 2, scaledY, color, false);
-        matrices.pop();
+        matrices.popMatrix();
     }
 
     private static Text buildHelpLine(String prefix, String highlight1, String mid, String highlight2, String suffix) {

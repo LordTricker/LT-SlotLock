@@ -27,7 +27,7 @@ public abstract class ClientPlayerEntityMixin extends net.minecraft.client.netwo
             return;
         }
 
-        int selected = this.getInventory().selectedSlot;
+        int selected = this.getInventory().getSelectedSlot();
         int eqSlot = selected + 36;
         boolean isLocked = SlotLockLogic.shouldBlockThrowAction(eqSlot);
 

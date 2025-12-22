@@ -83,8 +83,12 @@ public class MainSettingsScreen extends Screen {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context, mouseX, mouseY, delta);
+        try {
+            this.applyBlur(context);
+        } catch (IllegalStateException ignored) {
+        }
+        this.renderInGameBackground(context);
         super.render(context, mouseX, mouseY, delta);
-        drawCenteredText(context, this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFF);
+        drawCenteredText(context, this.textRenderer, this.title, this.width / 2, 15, 0xFFFFFFFF);
     }
 }
