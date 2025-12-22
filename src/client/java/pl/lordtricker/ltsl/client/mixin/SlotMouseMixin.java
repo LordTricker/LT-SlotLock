@@ -1,5 +1,6 @@
 package pl.lordtricker.ltsl.client.mixin;
 
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.collection.DefaultedList;
@@ -18,9 +19,13 @@ public abstract class SlotMouseMixin {
     @Shadow protected int y;
 
     @Inject(method = "mouseClicked", at = @At("HEAD"), cancellable = true)
-    private void onMouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+    private void onMouseClicked(Click click, boolean doubled, CallbackInfoReturnable<Boolean> cir) {
         if (!SlotLockState.isSlotSettingsActive()) return;
+        int button = click.button();
         if (button != 0 && button != 2) return;
+
+        double mouseX = click.x();
+        double mouseY = click.y();
 
         HandledScreen<?> screen = (HandledScreen<?>)(Object)this;
         if (screen.getScreenHandler() == null) return;
