@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
 import pl.lordtricker.ltsl.client.util.ColorUtils;
 import pl.lordtricker.ltsl.client.util.Messages;
+import pl.lordtricker.ltsl.core.SlotLockLogic;
 
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin extends net.minecraft.client.network.AbstractClientPlayerEntity {
@@ -29,9 +29,9 @@ public abstract class ClientPlayerEntityMixin extends net.minecraft.client.netwo
 
         int selected = this.getInventory().selectedSlot;
         int eqSlot = selected + 36;
-        boolean isLocked = LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(eqSlot);
+        boolean isLocked = SlotLockLogic.shouldBlockThrowAction(eqSlot);
 
-        if (LtslotlockClient.slotLockEnabled && isLocked && !this.getInventory().getStack(selected).isEmpty()) {
+        if (isLocked && !this.getInventory().getStack(selected).isEmpty()) {
             String msg = Messages.get("action.throw.denied");
             this.sendMessage(ColorUtils.translateColorCodes(msg), false);
             cir.setReturnValue(false);

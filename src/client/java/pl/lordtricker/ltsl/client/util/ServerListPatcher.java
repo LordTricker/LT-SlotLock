@@ -2,8 +2,9 @@ package pl.lordtricker.ltsl.client.util;
 
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.option.ServerList;
-import pl.lordtricker.ltsl.client.config.SlotSettings;
 import pl.lordtricker.ltsl.client.mixin.ServerListAccessor;
+import pl.lordtricker.ltsl.core.config.SlotSettings;
+import pl.lordtricker.ltsl.core.util.RemoteAdConfig;
 
 import java.util.List;
 import java.util.Locale;

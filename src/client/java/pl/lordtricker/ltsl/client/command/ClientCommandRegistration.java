@@ -6,19 +6,17 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.command.CommandRegistryAccess;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
 import pl.lordtricker.ltsl.client.gui.MainSettingsScreen;
-import pl.lordtricker.ltsl.client.util.ColorUtils;
 import pl.lordtricker.ltsl.client.util.Messages;
 
 
 public class ClientCommandRegistration {
 
     public static void registerCommands() {
-        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistration::registerLtFilterCommand);
+        ClientCommandRegistrationCallback.EVENT.register(ClientCommandRegistration::registerLtslCommand);
     }
 
-    private static void registerLtFilterCommand(
+    private static void registerLtslCommand(
             CommandDispatcher<FabricClientCommandSource> dispatcher,
             CommandRegistryAccess registryAccess
     ) {
@@ -27,7 +25,7 @@ public class ClientCommandRegistration {
                         // /ltf – podstawowe info
                         .executes(ctx -> {
                             String message = Messages.get("mod.info");
-                            ctx.getSource().sendFeedback(ColorUtils.translateColorCodes(message));
+                            ctx.getSource().sendFeedback(CommandUi.colored(message));
                             return 1;
                         })
                         // /ltb settings – otwarcie GUI ustawień
@@ -50,7 +48,7 @@ public class ClientCommandRegistration {
                         .then(ClientCommandManager.literal("pomoc")
                                 .executes(ctx -> {
                                     String msg = Messages.get("command.help");
-                                    ctx.getSource().sendFeedback(ColorUtils.translateColorCodes(msg));
+                                    ctx.getSource().sendFeedback(CommandUi.colored(msg));
                                     return 1;
                                 })
                         )

@@ -1,4 +1,4 @@
-package pl.lordtricker.ltsl.client.config;
+package pl.lordtricker.ltsl.core.config;
 
 import java.util.ArrayList;
 import java.util.List;

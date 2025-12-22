@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
-import pl.lordtricker.ltsl.client.config.SlotSettings;
+import pl.lordtricker.ltsl.core.SlotLockLogic;
+import pl.lordtricker.ltsl.core.SlotLockState;
 
 @Mixin(HandledScreen.class)
 public abstract class SlotOverlayMixin {
@@ -20,7 +20,7 @@ public abstract class SlotOverlayMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
     private void onRender(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        if (!LtslotlockClient.slotSettingsActive) return;
+        if (!SlotLockState.isSlotSettingsActive()) return;
 
         HandledScreen<?> screen = (HandledScreen<?>)(Object)this;
         if (screen.getScreenHandler() == null) return;
@@ -28,16 +28,11 @@ public abstract class SlotOverlayMixin {
         DefaultedList<Slot> slots = ((ScreenHandlerAccessor) screen.getScreenHandler()).getSlots();
         if (slots == null || slots.size() < 45) return;
 
-        SlotSettings settings = LtslotlockClient.serversConfig.slotSettings;
-
         for (int i = 9; i < 45; i++) {
             Slot slot = slots.get(i);
             if (slot == null) continue;
 
-            int index = i;
-            int color = settings.doNotCleanSlots.contains(index)
-                    ? 0x8000FF00
-                    : 0x80FF0000;
+            int color = SlotLockLogic.slotSelectionOverlayColor(i);
 
             int realX = this.x + slot.x;
             int realY = this.y + slot.y;

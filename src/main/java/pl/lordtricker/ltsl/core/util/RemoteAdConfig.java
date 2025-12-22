@@ -1,4 +1,4 @@
-package pl.lordtricker.ltsl.client.util;
+package pl.lordtricker.ltsl.core.util;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

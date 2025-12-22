@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pl.lordtricker.ltsl.client.config.SlotSettings;
 import pl.lordtricker.ltsl.client.util.ServerListPatcher;
+import pl.lordtricker.ltsl.core.config.SlotSettings;
 
 @Mixin(ServerList.class)
 public class ServerListMixin {
@@ -19,7 +19,7 @@ public class ServerListMixin {
     }
 
     // Fallback for name variations in different mappings
-    @Inject(method = "load", at = @At("TAIL"), cancellable = false, require = 0)
+    @Inject(method = "load()V", at = @At("TAIL"), cancellable = false, require = 0)
     private void ltsl$afterLoad(CallbackInfo ci) {
         ltsl$injectOrMove();
     }

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
+import pl.lordtricker.ltsl.core.SlotLockState;
 
 @Mixin(HandledScreen.class)
 public abstract class LockedSlotOverlayMixin {
@@ -22,9 +22,7 @@ public abstract class LockedSlotOverlayMixin {
         if (MinecraftClient.getInstance().currentScreen != null && !(MinecraftClient.getInstance().currentScreen instanceof InventoryScreen)) {
             return;
         }
-        if (LtslotlockClient.slotLockEnabled
-                && slot.id >= 9
-                && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(slot.id)) {
+        if (slot.id >= 9 && SlotLockState.isSlotLocked(slot.id)) {
             context.drawTexture(
                     LOCK_ICON,
                     slot.x,

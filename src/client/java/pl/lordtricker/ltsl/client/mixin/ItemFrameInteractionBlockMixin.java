@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
+import pl.lordtricker.ltsl.core.SlotLockLogic;
 
 @Mixin(ClientConnection.class)
 public abstract class ItemFrameInteractionBlockMixin {
@@ -29,7 +29,7 @@ public abstract class ItemFrameInteractionBlockMixin {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.world != null) {
                 Entity target = client.world.getEntityById(entityId);
-                if (target instanceof ItemFrameEntity && LtslotlockClient.itemFrameLockEnabled) {
+                if (target instanceof ItemFrameEntity && SlotLockLogic.shouldBlockItemFrameInteraction()) {
                     ci.cancel();
                 }
             }

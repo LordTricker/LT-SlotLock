@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
-import pl.lordtricker.ltsl.client.config.SlotSettings;
+import pl.lordtricker.ltsl.core.SlotLockLogic;
+import pl.lordtricker.ltsl.core.SlotLockState;
 
 @Mixin(HandledScreen.class)
 public abstract class SlotMouseMixin {
@@ -19,16 +19,14 @@ public abstract class SlotMouseMixin {
 
     @Inject(method = "mouseClicked", at = @At("HEAD"), cancellable = true)
     private void onMouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-        if (!LtslotlockClient.slotSettingsActive) return;
-        if (button != 2) return;
+        if (!SlotLockState.isSlotSettingsActive()) return;
+        if (button != 0 && button != 2) return;
 
         HandledScreen<?> screen = (HandledScreen<?>)(Object)this;
         if (screen.getScreenHandler() == null) return;
 
         DefaultedList<Slot> slots = ((ScreenHandlerAccessor) screen.getScreenHandler()).getSlots();
         if (slots == null || slots.size() < 45) return;
-
-        SlotSettings settings = LtslotlockClient.serversConfig.slotSettings;
 
         for (int i = 9; i < 45; i++) {
             Slot slot = slots.get(i);
@@ -39,12 +37,7 @@ public abstract class SlotMouseMixin {
 
             if (mouseX >= realX && mouseX < realX + 16 &&
                     mouseY >= realY && mouseY < realY + 16) {
-                int index = i;
-                if (settings.doNotCleanSlots.contains(index)) {
-                    settings.doNotCleanSlots.remove(Integer.valueOf(index));
-                } else {
-                    settings.doNotCleanSlots.add(index);
-                }
+                SlotLockLogic.toggleSlotSetting(i);
                 cir.setReturnValue(true);
                 return;
             }

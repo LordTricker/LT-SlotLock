@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
+import pl.lordtricker.ltsl.core.SlotLockState;
 
 @Mixin(InGameHud.class)
 public class LockedHotbarOverlayMixin {
@@ -30,8 +30,7 @@ public class LockedHotbarOverlayMixin {
             int eqSlot = 36 + i;
             int slotX = xStart + i * 20;
 
-            if (LtslotlockClient.slotLockEnabled
-                    && LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(eqSlot)) {
+            if (SlotLockState.isSlotLocked(eqSlot)) {
                 context.drawTexture(
                         LOCK_ICON,
                         slotX + 2,

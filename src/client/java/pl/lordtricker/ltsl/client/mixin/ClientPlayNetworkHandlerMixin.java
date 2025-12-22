@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pl.lordtricker.ltsl.client.LtslotlockClient;
+import pl.lordtricker.ltsl.core.SlotLockLogic;
 
 @Mixin(ClientConnection.class)
 public abstract class ClientPlayNetworkHandlerMixin {
@@ -18,9 +18,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
         if (packet instanceof ClickSlotC2SPacket clickSlotPacket) {
             if (clickSlotPacket.getActionType() == SlotActionType.THROW) {
                 int slotIndex = clickSlotPacket.getSlot();
-                boolean isLocked = LtslotlockClient.slotLockEnabled &&
-                        LtslotlockClient.serversConfig.slotSettings.doNotCleanSlots.contains(slotIndex);
-                if (isLocked) {
+                if (SlotLockLogic.shouldBlockThrowAction(slotIndex)) {
                     ci.cancel();
                 }
             }

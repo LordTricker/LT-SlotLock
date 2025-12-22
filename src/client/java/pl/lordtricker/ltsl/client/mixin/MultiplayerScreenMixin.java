@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import pl.lordtricker.ltsl.client.config.SlotSettings;
 import pl.lordtricker.ltsl.client.util.ServerListPatcher;
+import pl.lordtricker.ltsl.core.config.SlotSettings;
 
 @Mixin(MultiplayerScreen.class)
 public class MultiplayerScreenMixin {
