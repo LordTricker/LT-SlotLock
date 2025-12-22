@@ -3,6 +3,7 @@ package pl.lordtricker.ltsl.client.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,6 +33,7 @@ public class LockedHotbarOverlayMixin {
 
             if (SlotLockState.isSlotLocked(eqSlot)) {
                 context.drawTexture(
+                        RenderLayer::getGuiTextured,
                         LOCK_ICON,
                         slotX + 2,
                         y + 2,
